@@ -20,8 +20,6 @@ function m3(req,res,next){
 }
 
 app.use(m1,m2,m3);
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.text());
