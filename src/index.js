@@ -1,22 +1,24 @@
 import express from 'express';
 import { connectDB } from './Config/dbconfig.js';
-import multer from 'multer';
-import { v2 as cloudinary } from 'cloudinary'; // Corrected Cloudinary import
-import dotenv from 'dotenv';
 
-dotenv.config(); // Load environment variables
+import { v2 as cloudinary } from 'cloudinary'; // Corrected Cloudinary import
+
+import { CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, Cloudinary_CLOUD_NAME } from './Config/service.js';
+import { upload } from './Config/multerconfig.js';
+
+
 
 const app = express();
 const port = 3000;
 
 // Cloudinary configuration
 cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME || "dd0topxow",
-    api_key: process.env.CLOUDINARY_API_KEY || "164726986941791",
-    api_secret: process.env.CLOUDINARY_API_SECRET || "UCcigLPcnJqWyToX_GfIXlA4yA4",
+    cloud_name: Cloudinary_CLOUD_NAME,
+    api_key: CLOUDINARY_API_KEY,
+    api_secret: CLOUDINARY_API_SECRET,
 });
 
-// Middleware functions
+// Sample middleware for logging purposes
 function m1(req, res, next) {
     console.log("m1");
     next();
@@ -27,57 +29,36 @@ function m2(req, res, next) {
 }
 function m3(req, res, next) {
     console.log("m3");
+    console.log(CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, Cloudinary_CLOUD_NAME);
     next();
 }
 
-// Multer setup for handling file uploads
-const storage = multer.memoryStorage(); // Store image in memory
-const upload = multer({ storage: storage });
-
-// Apply middleware
+// Apply middleware globally
 app.use(m1, m2, m3);
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.text());
+app.use(express.json()); // To parse JSON request bodies
+app.use(express.urlencoded({ extended: true })); // To parse URL-encoded data
+app.use(express.text()); // To parse plain text
 
-// Sample route for testing
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
 
-// Test route to view query and body data
-app.get('/test', (req, res) => {
-    console.log(req.query);
-    console.log(req.body);
-    res.json({
-        name: 'test',
-        age: 18,
-        sex: 'male',
-        address: 'beijing',
-        hobby: ['a', 'b', 'c'],
-        info: {
-            name: 'test',
-            age: 18
-        }
-    });
-});
 
-// Image upload route
+
+
+
+// Route to handle image upload via Cloudinary
 app.post('/upload', upload.single('image'), async (req, res) => {
     try {
         if (!req.file) {
             return res.status(400).json({ error: 'No file uploaded' });
         }
-
         // Create a Cloudinary stream and upload the file from buffer
         const uploadStream = cloudinary.uploader.upload_stream(
-            { folder: 'uploads' },
+            { folder: 'uploads' },  // Specify folder in Cloudinary
             (error, result) => {
                 if (error) {
                     console.error('Cloudinary Upload Error:', error);
                     return res.status(500).json({ error: 'Error uploading image' });
                 }
-                // Return the uploaded image URL in the response
+                // Respond with the uploaded image URL
                 res.json({ imageUrl: result.secure_url });
             }
         );
@@ -91,8 +72,11 @@ app.post('/upload', upload.single('image'), async (req, res) => {
     }
 });
 
-// Start the server and connect to the database
+
+
+
+// Start the Express server and connect to the database
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
-    connectDB();
+    connectDB(); // Call your database connection function
 });
