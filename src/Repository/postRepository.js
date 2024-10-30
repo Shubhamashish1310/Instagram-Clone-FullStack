@@ -1,4 +1,4 @@
-import Post from "../Schema/postschema";
+import Post from "../Schema/postSchema";
 
 export async function createpost( image, caption, user) {
     try {

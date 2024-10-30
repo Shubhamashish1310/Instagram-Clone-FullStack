@@ -18,23 +18,8 @@ cloudinary.config({
     api_secret: CLOUDINARY_API_SECRET,
 });
 
-// Sample middleware for logging purposes
-function m1(req, res, next) {
-    console.log("m1");
-    next();
-}
-function m2(req, res, next) {
-    console.log("m2");
-    next();
-}
-function m3(req, res, next) {
-    console.log("m3");
-    console.log(CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, Cloudinary_CLOUD_NAME);
-    next();
-}
 
-// Apply middleware globally
-app.use(m1, m2, m3);
+
 app.use(express.json()); // To parse JSON request bodies
 app.use(express.urlencoded({ extended: true })); // To parse URL-encoded data
 app.use(express.text()); // To parse plain text
