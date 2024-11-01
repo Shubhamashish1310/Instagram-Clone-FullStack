@@ -1,10 +1,10 @@
 import express from 'express';
-import { connectDB } from './Config/dbconfig.js';
+import { connectDB } from './Config/dbConfig.js';
 
 import { v2 as cloudinary } from 'cloudinary'; // Corrected Cloudinary import
 
-import { CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, Cloudinary_CLOUD_NAME } from './Config/service.js';
-import { upload } from './Config/multerconfig.js';
+import { CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, Cloudinary_CLOUD_NAME } from './Config/serverConfig.js';
+import { upload } from './Config/multerConfig.js';
 
 
 
