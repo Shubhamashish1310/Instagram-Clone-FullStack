@@ -1,28 +1,13 @@
-import Post from "../Schema/post";
+import post from "../Schema/post.js";
 
-export async function createpost( image, caption, user) {
+
+
+export async function createPost( image, caption) {
     try {
-        const newpost = await Post.create({ image, caption, user });
-    return create;
+        const newpost = await post.create({ image, caption });
+    return newpost;
     } catch (error) {
         console.log(`there is error in create post ${error}`)
     }
 }
 
-export async function findallpost() {
-    try {
-        const post = await Post.find();
-        return post;
-    } catch (error) {
-        console.log(`there is error in findallpost ${error}`)
-    }
-}
-
-export async function findpostbyid(id) {
-    try {
-        const post = await Post.findById(id);
-        return post;
-    } catch (error) {
-        console.log(`there is error in findpostbyid ${error}`)
-    }
-}
