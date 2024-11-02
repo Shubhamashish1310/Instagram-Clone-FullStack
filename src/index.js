@@ -6,7 +6,7 @@ import router from './Routes/postRoutes.js';
 const app = express();
 const port = 3000;
 
-app.use('/', router);
+app.use('/upload', router);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');

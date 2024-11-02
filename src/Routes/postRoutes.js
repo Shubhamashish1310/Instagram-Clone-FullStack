@@ -4,6 +4,6 @@ import { postscontroller } from "../Controller/postController.js";
 
 const router = express.Router();
 
-router.post("/upload", upload.single("image"), cloudinaryUpload, postscontroller);
+router.post("/", upload.single("image"), cloudinaryUpload, postscontroller);
 
 export default router

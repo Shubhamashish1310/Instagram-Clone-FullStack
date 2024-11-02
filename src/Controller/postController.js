@@ -6,8 +6,8 @@ export async function postscontroller(req, res) {
 
 
     const post = await createPostService({
-        image: req.file.cloudinaryUrl,
         caption: req.body.caption,
+        image: req.file.cloudinaryUrl,
     });
     // Respond with the Cloudinary URL
    res.status(201).json({ 
