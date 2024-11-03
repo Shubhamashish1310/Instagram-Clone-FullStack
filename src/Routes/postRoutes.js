@@ -1,9 +1,9 @@
-import express from "express";
-import { cloudinaryUpload, upload } from "../Config/multerConfig.js";
-import { postscontroller } from "../Controller/postController.js";
-
+import express from 'express';
+import v1Post from './v1/v1post.js'; 
+import v2Post from './v2/v2Post.js';
 const router = express.Router();
 
-router.post("/", upload.single("image"), cloudinaryUpload, postscontroller);
+router.use('/v1', v1Post);
+router.use('/v2', v2Post);
 
 export default router

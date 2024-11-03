@@ -1,12 +1,12 @@
 import express from 'express';
 import { connectDB } from './Config/dbConfig.js';
+import postRoutes from './Routes/postRoutes.js';
 
-import router from './Routes/postRoutes.js';
 
 const app = express();
 const port = 3000;
 
-app.use('/upload', router);
+app.use('/api', postRoutes );
 
 app.get('/', (req, res) => {
     res.send('Hello World!');

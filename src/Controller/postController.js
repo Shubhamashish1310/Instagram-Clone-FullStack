@@ -1,4 +1,4 @@
-import { createPostService } from "../Services/postService.js";
+import { createPostService, findAllPostService } from "../Services/postService.js";
 
 export async function postscontroller(req, res) {
     console.log('req.file:', req.file); // should now include `cloudinaryUrl`
@@ -16,4 +16,16 @@ export async function postscontroller(req, res) {
     data: post
     });
 
+}
+
+export async function getAllPosts(req, res) {
+    const limit = req.query.limit || 10;
+    const offset = req.query.offset || 0;
+
+    const paginatedPosts = await findAllPostService(limit, offset);
+    res.status(200).json({
+        success: true,
+        message: 'Posts fetched successfully',
+        data: paginatedPosts
+    });
 }
