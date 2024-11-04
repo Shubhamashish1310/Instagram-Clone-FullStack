@@ -1,11 +1,12 @@
 import express from "express";
 import { cloudinaryUpload, upload } from "../../Config/multerConfig.js";
 import { deletePost, getAllPosts, postscontroller, updatePost } from "../../Controller/postController.js";
+import { zodPostSchema } from '../../validator/zodPostSchema.js';
+import {validate} from "../../validator/zodValidator.js";
 
+const router = express.Router(); 
 
-const router = express.Router();
-
-router.post("/post", upload.single("image"), cloudinaryUpload, postscontroller);
+router.post("/post", upload.single("image"), cloudinaryUpload,validate(zodPostSchema), postscontroller);
 router.get("/post", getAllPosts);
 router.delete("/post/:id", deletePost);
 router.put("/post/:id", upload.single("image"), cloudinaryUpload, updatePost);
