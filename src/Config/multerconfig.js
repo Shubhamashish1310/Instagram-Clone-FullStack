@@ -14,11 +14,12 @@ cloudinary.config({
 export const cloudinaryUpload = async (req, res, next) => {
     try {
         if (!req.file) {
-            return res.status(400).json({ error: 'No file provided' });
+            // If no file is uploaded, skip Cloudinary upload and move to the next middleware
+            return next();
         }
 
-        const result = await cloudinary.uploader.upload_stream(
-            { folder: 'uploads' }, // optional Cloudinary folder
+        const uploadStream = cloudinary.uploader.upload_stream(
+            { folder: 'uploads' }, // Optional Cloudinary folder
             (error, result) => {
                 if (error) {
                     return res.status(500).json({ error: 'Cloudinary upload failed' });
@@ -28,11 +29,9 @@ export const cloudinaryUpload = async (req, res, next) => {
             }
         );
 
-        // Initiate the upload
-        result.end(req.file.buffer);
+        uploadStream.end(req.file.buffer);
     } catch (error) {
-        console.error('Error in cloudinaryUpload:', error);
-        res.status(500).json({ error: 'Failed to upload image' });
+        console.error('Error in Cloudinary upload:', error);
+        res.status(500).json({ error: 'Server error during Cloudinary upload' });
     }
 };
-

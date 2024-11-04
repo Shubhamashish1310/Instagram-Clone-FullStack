@@ -42,3 +42,15 @@ export async function deletePostById(id) {
     }
 }
 
+//---------------------------------------------------------------Update post---------------------------------------------------------------
+//Model.findByIdAndUpdate(id, { name: 'jason bourne' }, options)
+//A.findByIdAndUpdate(id, update, options)
+export async function updatePostById(id , updateObject) {
+    try {
+        const posts = await post.findByIdAndUpdate(id,updateObject , {new: true});
+        return posts;
+    } catch (error) {
+        console.log(`there is error in update post ${error}`)
+    }
+}
+
