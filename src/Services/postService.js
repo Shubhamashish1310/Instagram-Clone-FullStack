@@ -1,4 +1,4 @@
-import { countAllPost, createPost, findAllPost } from "../Repository/postRepository.js";
+import { countAllPost, createPost, deletePostById, findAllPost } from "../Repository/postRepository.js";
 
 export const createPostService = async (createPostObejct) => {
     const caption = createPostObejct.caption?.trim();
@@ -18,4 +18,9 @@ export const findAllPostService = async (limit,offset) => {
     const totalpages = Math.ceil(totaldocuments / limit);
     const currentpage = Math.ceil(offset / limit) + 1;
     return {posts, totalpages, totaldocuments, currentpage};
+}
+
+export const deletePostService = async (id) => {
+    const response = await deletePostById(id);
+    return response;
 }

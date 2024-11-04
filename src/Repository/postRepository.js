@@ -1,7 +1,7 @@
 import post from "../Schema/post.js";
 
 
-
+//create post
 export async function createPost( image, caption) {
     try {
         const newpost = await post.create({ image, caption });
@@ -11,6 +11,7 @@ export async function createPost( image, caption) {
     }
 }
 
+//-----------------------------------------------------------------Find all post---------------------------------------------------------------
 export async function findAllPost(limit,offset) {
     try {
         const posts = await post.find().sort({ createdAt: -1 }).skip(offset).limit(limit);
@@ -20,6 +21,7 @@ export async function findAllPost(limit,offset) {
     }
 }
 
+//---------------------------------------------------------------Count all post---------------------------------------------------------------
 export async function countAllPost(){
     try {
         const count = await post.countDocuments();
@@ -29,12 +31,14 @@ export async function countAllPost(){
     }
 }
 
-// export async function deletePost(id) {
-//     try {
-//         const posts = await post.findByIdAndDelete(id);
-//         return posts;
-//     } catch (error) {
-//         console.log(`there is error in delete post ${error}`)
-//     }
-// }
+
+//---------------------------------------------------------------Delete post---------------------------------------------------------------
+export async function deletePostById(id) {
+    try {
+        const posts = await post.findByIdAndDelete(id);
+        return posts;
+    } catch (error) {
+        console.log(`there is error in delete post ${error}`)
+    }
+}
 
