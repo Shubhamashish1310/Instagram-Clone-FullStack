@@ -14,10 +14,8 @@ cloudinary.config({
 export const cloudinaryUpload = async (req, res, next) => {
     try {
         if (!req.file) {
-            // If no file is uploaded, skip Cloudinary upload and move to the next middleware
             return next();
         }
-
         const uploadStream = cloudinary.uploader.upload_stream(
             { folder: 'uploads' }, // Optional Cloudinary folder
             (error, result) => {

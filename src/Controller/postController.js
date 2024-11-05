@@ -4,11 +4,19 @@ import { createPostService, deletePostService, findAllPostService, updatePostSer
 export async function postscontroller(req, res) {
     console.log('req.file:', req.file); // should now include `cloudinaryUrl`
     console.log('req.body:', req.body);
+    if(!req.file) {
+        return res.status(400).json({
+            success: false,
+            message: 'No file uploaded',
+            data: null
+        });
+    }
     const post = await createPostService({
         caption: req.body.caption,
         image: req.file.cloudinaryUrl,
     });
     // Respond with the Cloudinary URL
+   
    res.status(201).json({ 
     success: true,
     message: 'Image uploaded successfully',
