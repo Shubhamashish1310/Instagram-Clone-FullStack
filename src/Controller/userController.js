@@ -1,4 +1,4 @@
-import { signupUserService } from "../Services/userService.js";
+import { loginUserService, signupUserService } from "../Services/userService.js";
 
 export async function signUpController(req, res) {
     try {
@@ -21,6 +21,25 @@ export async function signUpController(req, res) {
         res.status(500).json({
             success: false,
             message: 'Failed to create user in userController',
+            data: error
+        })
+    }
+}
+
+
+export async function loginController(req, res) {
+    try {
+        const token = await loginUserService(req.body);
+        return res.status(200).json({
+            success: true,
+            message: 'User logged in successfully',
+            data: token
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to login user in userController',
             data: error
         })
     }

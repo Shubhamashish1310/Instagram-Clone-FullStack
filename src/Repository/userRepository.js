@@ -1,19 +1,20 @@
 
 import user from "../Schema/user.js";
 
-export async function getUserbyEmail(email) {
+export async function findUserbyEmail(email) {
     try {
-      const user = await User.findOne({email});
-      return user;  
+      const newUser = await user.findOne({email});
+      return newUser;  
     } 
     catch (error) {
-        console.log(`there is error in get user by email ${error}`)
+        console.log(`there is error in get user by email repository in user repository ${error}`)
+        throw error
     }
 }
 
 export async function getUser() {
     try {
-      const user = await User.find();
+      const user = await user.find();
       return user;  
     } 
     catch (error) {
