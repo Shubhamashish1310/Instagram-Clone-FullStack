@@ -39,7 +39,7 @@ export async function loginUserService(userDetails) {
             }
         }
 
-       const token = generateJwtToken({email: user.email, id: user._id, username: user.username});
+       const token = generateJwtToken({email: user.email, id: user._id, username: user.username, role: user.role||"user"});
        return token;
     }
     catch(error){

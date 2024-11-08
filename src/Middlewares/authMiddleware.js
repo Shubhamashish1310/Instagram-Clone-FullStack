@@ -30,3 +30,23 @@ export async function authMiddleware(req, res, next) {
         });
     }
 }
+
+export async function isAdminMiddleware(req, res, next) {
+    if(req.user.role !== 'admin') {
+        return res.status(403).json({
+            success: false,
+            message: 'Access denied. You are not an admin.'
+        });
+    }
+    next();
+}
+
+// export async function isUserMiddleware(req, res, next) {
+//     if(req.user.role !== 'user') {
+//         return res.status(403).json({
+//             success: false,
+//             message: 'Access denied. You are not a user.'
+//         });
+//     }
+//     next();
+// }
