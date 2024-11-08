@@ -34,3 +34,4 @@ export async function createUser(User) {
         throw error
     }
 }
+

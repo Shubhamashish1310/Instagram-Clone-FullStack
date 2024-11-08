@@ -1,3 +1,4 @@
+import { findUserbyEmail } from "../Repository/userRepository.js";
 import { loginUserService, signupUserService } from "../Services/userService.js";
 
 export async function signUpController(req, res) {
@@ -40,6 +41,24 @@ export async function loginController(req, res) {
         res.status(500).json({
             success: false,
             message: 'Failed to login user in userController',
+            data: error
+        })
+    }
+}
+
+export async function findUserbyEmailController(req, res) {
+    try {
+        const user = await findUserbyEmail(req.body.email);
+        return res.status(200).json({
+            success: true,
+            message: 'User found successfully',
+            data: user
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to find user in userController',
             data: error
         })
     }

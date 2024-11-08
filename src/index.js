@@ -1,6 +1,7 @@
 import express from 'express';
 import { connectDB } from './Config/dbConfig.js';
 import postRoutes from './Routes/postRoutes.js';
+import { authMiddleware } from './Middlewares/authMiddleware.js';
 
 
 const app = express();
@@ -12,7 +13,8 @@ app.use(express.urlencoded());
 
 app.use('/api', postRoutes );
 
-app.get('/', (req, res) => {
+app.get('/',authMiddleware ,(req, res) => {
+    console.log(req.user);
     res.send('Hello World!');
 })
 

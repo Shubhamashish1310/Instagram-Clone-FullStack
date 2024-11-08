@@ -46,3 +46,16 @@ export async function loginUserService(userDetails) {
         throw error;
     }
 }
+
+
+//check if user exist service layer
+
+export async function checkUserExists(email) {
+    try{
+        const user = await findUserbyEmail(email);
+        return user;
+    }
+    catch(error){
+        throw error;
+    }
+}
