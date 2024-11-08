@@ -1,4 +1,4 @@
-import { countAllPost, createPost, deletePostById, findAllPost, updatePostById } from "../Repository/postRepository.js";
+import { countAllPost, createPost, deletePostById, findAllPost, findPostById, updatePostById } from "../Repository/postRepository.js";
 
 export const createPostService = async (createPostObejct) => {
     const user = createPostObejct.user;
@@ -22,7 +22,17 @@ export const findAllPostService = async (limit,offset) => {
     return {posts, totalpages, totaldocuments, currentpage};
 }
 
-export const deletePostService = async (id) => {
+export const deletePostService = async (id, user) => {
+
+    const  post = await findPostById(id);
+    if(post.user != user){
+        console.log("Unauthorized not match");
+        throw{
+
+            status: 401,
+            message: "Unauthorized"
+        }
+    }
     const response = await deletePostById(id);
     return response;
 }

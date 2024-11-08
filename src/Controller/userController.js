@@ -1,3 +1,4 @@
+import e from "express";
 import { findUserbyEmail } from "../Repository/userRepository.js";
 import { loginUserService, signupUserService } from "../Services/userService.js";
 
@@ -56,7 +57,7 @@ export async function findUserbyEmailController(req, res) {
         })
     } catch (error) {
         console.log(error);
-        res.status(500).json({
+        res.status(error.status).json({
             success: false,
             message: 'Failed to find user in userController',
             data: error

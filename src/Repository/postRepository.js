@@ -14,7 +14,7 @@ export async function createPost(user,caption, image ) {
 //-----------------------------------------------------------------Find all post---------------------------------------------------------------
 export async function findAllPost(limit,offset) {
     try {
-        const posts = await post.find().sort({ createdAt: -1 }).skip(offset).limit(limit);
+        const posts = await post.find().sort({ createdAt: -1 }).skip(offset).limit(limit).populate('user', 'username email id');
         return posts;
     } catch (error) {
         console.log(`there is error in find post ${error}`)
@@ -54,3 +54,12 @@ export async function updatePostById(id , updateObject) {
     }
 }
 
+//---------------------------------------------------------------Find post by id---------------------------------------------------------------
+export async function findPostById(id) {
+    try {
+        const posts = await post.findById(id)
+        return posts;
+    } catch (error) {
+        console.log(`there is error in find post by id ${error}`)
+    }
+}

@@ -11,7 +11,7 @@ router.post("/post",authMiddleware, upload.single("image"), cloudinaryUpload,val
 
 router.get("/post", getAllPosts);
 
-router.delete("/post/:id", deletePost);
+router.delete("/post/:id",authMiddleware,deletePost);
 
 router.put("/post/:id", upload.single("image"), cloudinaryUpload, updatePost);
 

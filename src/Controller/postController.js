@@ -43,9 +43,10 @@ export async function getAllPosts(req, res) {
 
 export async function deletePost(req, res) {
     
+       try {
         const postId = req.params.id;
         console.log('Post ID:', postId);
-    const deletedPost = await deletePostService(postId);
+    const deletedPost = await deletePostService(postId,req.user.id);
 
     if (!deletedPost) {
         return res.status(404).json({
@@ -59,6 +60,14 @@ export async function deletePost(req, res) {
         message: 'Post deleted successfully',
         data: deletedPost
     });
+       } catch (error) {
+        
+        res.status(500).json({
+            success: false,
+            message: 'Failed to delete post',
+            data: error
+        });
+       }
   
     }
 
