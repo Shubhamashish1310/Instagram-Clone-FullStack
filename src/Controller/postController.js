@@ -1,7 +1,10 @@
-import express from "express";
+
 import { createPostService, deletePostService, findAllPostService, updatePostService } from "../Services/postService.js";
 
+
 export async function postscontroller(req, res) {
+    const userId = req.user;
+    console.log('usser Details',userId.id);
     console.log('req.file:', req.file); // should now include `cloudinaryUrl`
     console.log('req.body:', req.body);
     if(!req.file) {
@@ -12,8 +15,10 @@ export async function postscontroller(req, res) {
         });
     }
     const post = await createPostService({
+        user: userId.id,
         caption: req.body.caption,
         image: req.file.cloudinaryUrl,
+        
     });
     // Respond with the Cloudinary URL
    
