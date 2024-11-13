@@ -3,7 +3,7 @@ import express from 'express';
 
 import postRoutes from './Routes/postRoutes.js';
 import { authMiddleware } from './Middlewares/authMiddleware.js';
-import { connectDB } from './Config/dbConfig.js';
+import { connectDB } from '../../Practice/src/Config/dbConfig.js';
 
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
@@ -52,7 +52,7 @@ app.get('/auth', authMiddleware ,(req, res) => {
     res.send('User Authenticated!');
 })
 
-
+connectDB();
 // starting server
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
