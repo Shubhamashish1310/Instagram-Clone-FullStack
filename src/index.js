@@ -46,6 +46,10 @@ app.get('/' ,(req, res) => {
     console.log(req.user);
     res.send('Hello Shubham Ashish!');
 })
+app.get('/auth', authMiddleware ,(req, res) => {
+    console.log(req.user);
+    res.send('User Authenticated!');
+})
 
 
 // starting server
