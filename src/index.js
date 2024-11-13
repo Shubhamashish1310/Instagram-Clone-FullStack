@@ -42,9 +42,9 @@ app.use(express.urlencoded());
 // routes
 app.use('/api', postRoutes );
 
-app.get('/',authMiddleware ,(req, res) => {
+app.get('/' ,(req, res) => {
     console.log(req.user);
-    res.send('Hello World!');
+    res.send('Hello Shubham Ashish!');
 })
 
 
