@@ -3,11 +3,11 @@ import express from 'express';
 
 import postRoutes from './Routes/postRoutes.js';
 import { authMiddleware } from './Middlewares/authMiddleware.js';
-import { connectDB } from '../../Practice/src/Config/dbConfig.js';
+import { connectDB } from './Config/dbConfig.js';
 
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
-
+import ip from 'ip';
 // creating express app
 const app = express();
 const port = 3000;
@@ -45,7 +45,8 @@ app.use('/api', postRoutes );
 
 app.get('/' ,(req, res) => {
     console.log(req.user);
-    res.send('Hello Shubham Ashish!');
+    const ipaddress = ip.address();
+    res.send('Hello Shubham Ashish!'+ipaddress);
 })
 app.get('/auth', authMiddleware ,(req, res) => {
     console.log(req.user);
