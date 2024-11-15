@@ -4,21 +4,20 @@ const likeSchema = new mongoose.Schema({
     onModel: {
         type: String,
         required: true,
-        enum: ['Post', 'Comment']
+        enum: ["Post", "Comment"],
+    },
+    likeableId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        refPath: "onModel",
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
-    },
-    likeableID: {
-        type: mongoose.Schema.Types.ObjectId,
         required: true,
-        refPath: 'onModel'
-    }
-   
+        ref: "User",
+    },
 }, { timestamps: true });
 
-const like = mongoose.model("Like", likeSchema); // like collection
+const Like = mongoose.model("Like", likeSchema);
 
-export default like;
+export default Like;

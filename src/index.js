@@ -4,14 +4,19 @@ import express from 'express';
 import postRoutes from './Routes/postRoutes.js';
 import { authMiddleware } from './Middlewares/authMiddleware.js';
 import { connectDB } from './Config/dbConfig.js';
-
+ 
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import ip from 'ip';
+import cors from 'cors';
 // creating express app
 const app = express();
 const port = 3000;
 
+app.use(cors({
+    origin: true,
+    credentials: true
+}));
 
 // swagger documentation
 const options = {
@@ -28,7 +33,7 @@ const options = {
                 },
             ],
         },
-        apis: ['/Users/Shubham Ashish/OneDrive/Desktop/All Projects/Backend/Practice/src/Routes/v1post.js', '/Users/Shubham Ashish/OneDrive/Desktop/All Projects/Backend/Practice/src/Routes/v2/v2User.js', '/Users/Shubham Ashish/OneDrive/Desktop/All Projects/Backend/Practice/src/Routes/v1/v1post*.js'],
+        apis: ['/Users/Shubham Ashish/OneDrive/Desktop/All Projects/Backend/Practice/src/Routes/v1/*.js'],
     };
 const specs = swaggerJSDoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
