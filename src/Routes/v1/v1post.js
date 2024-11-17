@@ -1,5 +1,5 @@
 import express from "express";
-import { cloudinaryUpload, upload } from "../../Config/multerConfig.js";
+import { cloudinaryUpload, upload } from "../../Config/multerconfig.js";
 import { deletePost, getAllPosts, postscontroller, updatePost } from "../../Controller/postController.js";
 import { zodPostSchema } from '../../validator/zodPostSchema.js';
 import { validate } from "../../validator/zodValidator.js";
