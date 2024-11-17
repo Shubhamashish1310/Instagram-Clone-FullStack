@@ -3,7 +3,7 @@ import express from 'express';
 
 import postRoutes from './Routes/postRoutes.js';
 import { authMiddleware } from './Middlewares/authMiddleware.js';
-import { connectDB } from './Config/dbConfig.js';
+import { connectDB } from './Config/dbconfig.js';
  
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
