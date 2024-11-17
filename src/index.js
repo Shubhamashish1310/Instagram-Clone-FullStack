@@ -14,8 +14,8 @@ const app = express();
 const port = 3000;
 
 app.use(cors({
-    origin: true,
-    credentials: true
+    origin:true,
+    credentials:true
 }));
 
 // swagger documentation
@@ -51,7 +51,7 @@ app.use('/api', postRoutes );
 app.get('/' ,(req, res) => {
     console.log(req.user);
     const ipaddress = ip.address();
-    res.send('Hello Shubham Ashish!'+ipaddress);
+    res.send('Hello Shubham Ashish! this is just a check request'+ipaddress);
 })
 app.get('/auth', authMiddleware ,(req, res) => {
     console.log(req.user);
