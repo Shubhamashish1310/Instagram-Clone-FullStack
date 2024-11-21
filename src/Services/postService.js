@@ -1,43 +1,109 @@
-import { countAllPost, createPost, deletePostById, findAllPost, findPostById, updatePostById } from "../Repository/postRepository.js";
+import {
+    countAllPost,
+    createPost,
+    deletePostById,
+    findAllPost,
+    findAllUser,
+    findPostById,
+    findUserProfile,
+    updatePostById,
+} from "../Repository/postRepository.js";
 
-export const createPostService = async (createPostObejct) => {
-    const user = createPostObejct.user;
-    const caption = createPostObejct.caption?.trim();
-    const image = createPostObejct.image;
-   
-    // const user = createPostObejct.user; //later
+export const createPostService = async (createPostObject) => {
+    try {
+        const user = createPostObject.user;
+        const caption = createPostObject.caption?.trim();
+        const image = createPostObject.image;
 
-    const post = await createPost( user,caption,image);
+        if (!user || !caption || !image) {
+            throw new Error("Missing required fields");
+        }
 
-    return post;
-}
+        const post = await createPost(user, caption, image);
+        return post;
+    } catch (error) {
+        console.error(`Error in createPostService: ${error.message}`);
+        throw error;
+    }
+};
 
-export const findAllPostService = async (limit,offset) => {
-    const posts = await findAllPost(limit,offset);
-    
-    //calculate total pages and and total posts
-    const totaldocuments = await countAllPost();
-    const totalpages = Math.ceil(totaldocuments / limit);
-    const currentpage = Math.ceil(offset / limit) + 1;
-    return {posts, totalpages, totaldocuments, currentpage};
-}
+export const findAllPostService = async (limit = 10, offset = 0) => {
+    try {
+        if (limit < 1 || offset < 0) {
+            throw new Error("Invalid pagination parameters");
+        }
+
+        const posts = await findAllPost(limit, offset);
+        const totalDocuments = await countAllPost();
+        const totalPages = Math.ceil(totalDocuments / limit);
+        const currentPage = Math.ceil(offset / limit) + 1;
+
+        return { posts, totalPages, totalDocuments, currentPage };
+    } catch (error) {
+        console.error(`Error in findAllPostService: ${error.message}`);
+        throw error;
+    }
+};
+
+export const findAllUserService = async () => {
+    try {
+        const users = await findAllUser();
+        return users;
+    } catch (error) {
+        console.error(`Error in findAllUserService: ${error.message}`);
+        throw error;
+    }
+};
 
 export const deletePostService = async (id, user) => {
-
-    const  post = await findPostById(id);
-    if(post.user != user){
-        console.log("Unauthorized not match");
-        throw{
-
-            status: 401,
-            message: "Unauthorized"
+    try {
+        const post = await findPostById(id);
+        if (!post) throw new Error("Post not found");
+        if (String(post.user) !== String(user)) {
+            throw {
+                status: 401,
+                message: "Unauthorized: User does not have permission to delete this post",
+            };
         }
+
+        const response = await deletePostById(id);
+        return response;
+    } catch (error) {
+        console.error(`Error in deletePostService: ${error.message}`);
+        throw error;
     }
-    const response = await deletePostById(id);
-    return response;
+};
+
+export async function updatePostService(id, updateObject) {
+    try {
+        if (!updateObject || Object.keys(updateObject).length === 0) {
+            throw new Error("Update object is empty");
+        }
+
+        const response = await updatePostById(id, updateObject);
+        if (!response) throw new Error("Post not found for update");
+        return response;
+    } catch (error) {
+        console.error(`Error in updatePostService: ${error.message}`);
+        throw error;
+    }
 }
 
-export async function updatePostService(id,updateObject){
-    const response = await updatePostById(id,updateObject);
-    return response;
-}
+// ** New Service: Find User Profile **
+export const findUserProfileService = async (email) => {
+    try {
+        if (!email) {
+            throw new Error("email is required");
+        }
+
+        const profileData = await findUserProfile(email);
+        if (!profileData) {
+            throw new Error("Profile not found");
+        }
+
+        return profileData;
+    } catch (error) {
+        console.error(`Error in findUserProfileService: ${error.message}`);
+        throw error;
+    }
+};
