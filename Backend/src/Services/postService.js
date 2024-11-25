@@ -8,6 +8,7 @@ import {
     findUserProfile,
     updatePostById,
 } from "../Repository/postRepository.js";
+import User from "../Schema/user.js";
 
 export const createPostService = async (createPostObject) => {
     try {
@@ -59,7 +60,9 @@ export const deletePostService = async (id, user) => {
     try {
         const post = await findPostById(id);
         if (!post) throw new Error("Post not found");
-        if (String(post.user) !== String(user)) {
+        if (String(post.user._id.toString()) !== String(user)) {
+            console.log("user", user);
+            console.log("post user", post.user._id.toString());
             throw {
                 status: 401,
                 message: "Unauthorized: User does not have permission to delete this post",

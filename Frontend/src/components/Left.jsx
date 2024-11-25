@@ -15,11 +15,11 @@ function Left() {
   return (
     
          <aside 
-                className="w-1/4 border-e-2 border-secondary-content p-6 bg-tertiary hidden lg:flex flex-col   h-screen"
+                className="w-1/5 border-e-2 border-secondary-content p-6  hidden lg:flex flex-col   h-screen"
                 aria-label="Sidebar Navigation"
             >
                 
-                <ul className="space-y-6">
+                <ul className="space-y-11">
                     <li>  <Theme/> 
                     <div>
             <img src={Insta} alt="Instagram Logo" />
@@ -28,23 +28,23 @@ function Left() {
                     </li>
                     <li className="flex items-center space-x-3  cursor-pointer">
                         <AiFillHome className="text-2xl" />
-                        <span className="text-xl font-medium"><Link to="/home">Home</Link></span>
+                        <span className="text-2xl font-bold "><Link to="/home">Home</Link></span>
                     </li>
                     <li className="flex items-center space-x-3  cursor-pointer">
                         <ImUpload  className="text-2xl" />
-                        <span className="text-xl font-semibold"><Link to="/upload">Create Post</Link></span>
+                        <span className="text-2xl font-bold"><Link to="/upload">Create Post</Link></span>
                     </li>
                     <li className="flex items-center space-x-3  cursor-pointer">
                         <BsSearch className="text-2xl" />
-                        <span className="text-xl font-semibold"><Link to="/search">Search</Link></span>
+                        <span className="text-2xl font-bold"><Link to="/search">Search</Link></span>
                     </li>
                     <li className="flex items-center space-x-3  cursor-pointer">
                         <BiUserCircle className="text-2xl" />
-                        <span className="text-xl font-semibold"><Link to="/userprofile">Profile</Link></span>
+                        <span className="text-2xl font-bold"><Link to="/userprofile">Profile</Link></span>
                     </li>
                     <li className="flex items-center space-x-3  cursor-pointer">
                         <AiOutlineSetting className="text-2xl" />
-                        <span className="text-xl font-semibold">Settings</span>
+                        <span className="text-2xl font-bold">Settings</span>
                     </li>
                     <li className="flex items-center space-x-3  cursor-pointer">
                         <AiOutlineLogout className="text-2xl" />
@@ -53,7 +53,7 @@ function Left() {
                             localStorage.removeItem("userId");
                             toast.warn("Logout Successfully");
                             navigate('/login');
-                        }} className="text-xl font-semibold cursor-pointer">Logout</span>
+                        }} className="text-2xl font-bold cursor-pointer">Logout</span>
                            
                        
                     </li>

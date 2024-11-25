@@ -17,11 +17,13 @@ function PostCard({ post, onPostDeleted, onPostUpdated }) {
 
     const handleDelete = async () => {
         if (window.confirm("Are you sure you want to delete this post?")) {
+            console.log("Deleting post:", post._id);
             try {
                 const token = localStorage.getItem("authToken");
                 await axios.delete(`http://localhost:3000/api/v1/post/${post._id}`, {
+                    
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization:`Bearer ${token}`,
                     },
                 });
                 toast.success("Post deleted successfully!");
@@ -29,7 +31,7 @@ function PostCard({ post, onPostDeleted, onPostUpdated }) {
             } catch (error) {
                 console.error("Error deleting post:", error.response?.data || error.message);
                 toast.error(
-                    error.response?.data?.message || "Failed to delete the post. Please try again."
+                    error.response?.data?.message
                 );
             }
         }

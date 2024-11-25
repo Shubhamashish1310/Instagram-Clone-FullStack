@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { IoSearchSharp } from "react-icons/io5";
 import { MdErrorOutline } from "react-icons/md";
-import Left from "../Left";
+
 
 function Search({ users }) {
     const [searchQuery, setSearchQuery] = useState("");
@@ -16,7 +16,7 @@ function Search({ users }) {
     return (
         <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg border border-gray-200">
             {/* Search Input */}
-            <Left className="sticky top-0 h-screen w-1/5 bg-white shadow-md" />
+            
   
             <div className="relative">
                 <IoSearchSharp className="absolute text-2xl top-1/2 left-4 transform -translate-y-1/2 text-gray-400" />

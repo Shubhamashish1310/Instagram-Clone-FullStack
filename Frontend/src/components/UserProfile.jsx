@@ -65,7 +65,7 @@ function ProfilePage() {
   return (
     <div className="min-h-screen flex">
       {/* Sidebar Component */}
-      <Left className="sticky top-0 h-screen w-1/5 bg-white shadow-md" />
+     
   
       {/* Main Content */}
       <div className="flex-1 flex flex-col">

@@ -7,7 +7,7 @@ import { jwtDecode } from "jwt-decode";
 import { toast } from 'react-toastify';
 import homeImage from '../assets/home-phones.png'; // Replace with the correct path
 import Header from './Header';
-
+import Insta from './Pages/instagram.svg'
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -55,7 +55,11 @@ const Login = () => {
 
     return (
         <>
-            <Header />
+            <div className="flex justify-center items-center">
+                <img className='flex justify-center text-center items-center' src={Insta} alt="Instagram Logo" />
+            </div>
+            
+            
             <div className="flex flex-col lg:flex-row items-center justify-start min-h-screen bg-gray-50 gap-0">
                 {/* Left Section - Image */}
                 <div className="hidden lg:flex w-1/2 justify-center items-center">
@@ -65,6 +69,7 @@ const Login = () => {
                         className="auto-cols-auto"
                     />
                 </div>
+              
 
                 {/* Right Section - Login Form */}
                 <div className="flex flex-col w-full lg:w-[350px] p-10 bg-white rounded-lg shadow-lg">

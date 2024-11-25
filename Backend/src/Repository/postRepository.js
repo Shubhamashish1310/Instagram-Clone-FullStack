@@ -84,7 +84,7 @@ export async function updatePostById(id, updateObject) {
 export async function findPostById(id) {
     try {
         if (!id) throw new Error("Missing post ID");
-        const postById = await post.findById(id).populate('user', 'username email id', 'comment');
+        const postById = await post.findById(id).populate('user', 'username email id');
         return postById;
     } catch (error) {
         console.error(`Error in findPostById: ${error.message}`);

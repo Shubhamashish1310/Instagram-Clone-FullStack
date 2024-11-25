@@ -106,7 +106,7 @@ export async function deletePost(req, res) {
             data: deletedPost,
         });
     } catch (error) {
-        console.error(`Error in deletePost: ${error.message}`);
+        console.error(`Error in deletePostController: ${error.message}`);
         res.status(500).json({
             success: false,
             message: 'Failed to delete post',
