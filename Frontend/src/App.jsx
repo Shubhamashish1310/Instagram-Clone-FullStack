@@ -12,6 +12,7 @@ import Explore from "./components/Explore";
 import ProfilePage from "./components/UserProfile";
 import Left from "./components/Left"; // Your Sidebar Component
 import { Outlet } from "react-router-dom";
+import AllProfile from "./components/Pages/AllProfile";
 
 export default function App() {
     return (
@@ -32,6 +33,7 @@ export default function App() {
                             <Route path="/upload" element={<Upload />} />
                             <Route path="/search" element={<Explore />} />
                             <Route path="/profile" element={<Profile />} />
+                            <Route path="/all" element={<AllProfile />} />
                             <Route path="/userprofile" element={<ProfilePage />} />
                             <Route path="/userprofile/:id" element={<ProfilePage />} />
                         </Route>

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { IoMenu } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { BsSend } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 function PostCard({ post, onPostDeleted, onPostUpdated }) {
     const [showMenu, setShowMenu] = useState(false);
@@ -50,8 +51,11 @@ function PostCard({ post, onPostDeleted, onPostUpdated }) {
         }
 
         const formData = new FormData();
-        if (image) formData.append("image", image);
+        if (image) formData.append("file", image);
         if (caption.trim()) formData.append("caption", caption.trim());
+        if (image && image.type.startsWith("video/")) {
+            formData.append("resource_type", "video");
+        }
 
         try {
             const response = await axios.put(
@@ -134,20 +138,22 @@ function PostCard({ post, onPostDeleted, onPostUpdated }) {
 
             {/* Post Header */}
             <div className="flex items-center px-4 py-3 border-b">
-                <img
+               <Link to={`/all`}> <img
                     src={`https://i.pravatar.cc/150?u=${post.user?.email}`}
                     alt={post.user?.username || "User"}
                     className="w-10 h-10 rounded-full object-cover"
-                />
+                /></Link>
                 <div className="ml-3">
-                    <h3 className="font-semibold text-sm text-gray-900">{post.user?.username || "Anonymous"}</h3>
+                    <h3 className="font-semibold text-lg text-gray-900">{post.user?.username || "Anonymous"}</h3>
+                    
                     <p className="text-xs text-gray-500">{new Date(post.createdAt).toLocaleString()}</p>
                 </div>
+                
             </div>
 
             {/* Post Content */}
             {editing ? (
-                <div className="px-4 py-3">
+                <div className="px-4  bg-gray-100 py-3">
                     <textarea
                         className="w-full border rounded-md p-2 mb-3"
                         value={newCaption}
@@ -156,7 +162,7 @@ function PostCard({ post, onPostDeleted, onPostUpdated }) {
                     />
                     <input
                         type="file"
-                        accept="image/*"
+                        accept="image/*,video/*"
                         className="block w-full text-sm text-gray-500"
                         onChange={(e) => setNewImage(e.target.files[0])}
                     />
@@ -177,11 +183,21 @@ function PostCard({ post, onPostDeleted, onPostUpdated }) {
                 </div>
             ) : (
                 <>
-                    <img
-                        src={post.image}
-                        alt={post.caption}
-                        className="w-full object-cover max-h-[600px] overflow-hidden"
-                    />
+                    {post.image?.includes("video") ? (
+                        <video
+                            src={post.image}
+                            alt={post.caption}
+                            className="w-full object-cover max-h-[600px] overflow-hidden"
+                            loop
+                            controls
+                        />
+                    ) : (
+                        <img
+                            src={post.image}
+                            alt={post.caption}
+                            className="w-full object-cover max-h-[600px] overflow-hidden"
+                        />
+                    )}
                     <div className="px-4">
                         <p className="text-sm text-gray-800 mb-3">
                             <span className="font-semibold">{post.user?.username || "Anonymous"}: </span>

@@ -103,8 +103,8 @@ function ProfilePage() {
         </div>
   
         {/* Posts Section */}
-        <div className="max-w-5xl mx-auto px-4 py-8">
-          <h2 className="text-2xl font-semibold text-primary-content mb-6">Posts</h2>
+        <div className="size-2/3 max-w-full mx-auto px-4 py-8">
+          <h2 className="text-3xl font-semibold text-primary-content mb-6">Posts</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
             {userPosts.map((post) => (
               <div

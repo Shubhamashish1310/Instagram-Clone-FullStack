@@ -12,7 +12,7 @@ function Profile() {
         axios
             .get("http://localhost:3000/api/v1/post", {
                 headers: {
-                    authorization: `Bearer ${localStorage.getItem("token")}`,
+                    authorization: `Bearer ${localStorage.getItem("authToken")}`,
                 },
             })
             .then((res) => {
