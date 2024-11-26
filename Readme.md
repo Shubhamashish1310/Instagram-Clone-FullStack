@@ -120,14 +120,37 @@ instagram-clone/
 ---
 
 ## Screenshots
+
 ### Home Page:
-![Home Page](path-to-home-page-screenshot.png)
+![Home Page](Instagram%20Clone/home.png)
 
 ### Login Page:
-![Login Page](path-to-login-page-screenshot.png)
+![Login Page](Instagram%20Clone/login.png)
 
-### Timeline Feed:
-![Timeline Feed](path-to-timeline-feed-screenshot.png)
+### Signup Page:
+![Signup Page](Instagram%20Clone/signup.png)
+
+### Dark Mode:
+![Dark Mode](Instagram%20Clone/dark.png)
+
+### Upload Post:
+![Upload Post](Instagram%20Clone/upload.png)
+
+### Updates Section:
+![Updates Section](Instagram%20Clone/updates.png)
+
+### Updated Post:
+![Updated Post](Instagram%20Clone/updated.png)
+
+### Search Feature:
+![Search Feature](Instagram%20Clone/search.png)
+
+### Other User Profile:
+![Other User Profile](Instagram%20Clone/more.png)
+
+### Delete Post:
+![Delete Post](Instagram%20Clone/delete.png)
+
 
 ---
 
