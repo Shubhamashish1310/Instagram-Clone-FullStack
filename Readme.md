@@ -171,7 +171,7 @@ The backend APIs are documented using Swagger. To view the API documentation:
 ## Acknowledgements
 - **React** and **Node.js** community for amazing resources.
 - **Cloudinary** for seamless image hosting.
-- Special thanks to [Your Name](https://github.com/your-username) for building this project.
+
 
 ---
 
