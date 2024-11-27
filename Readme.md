@@ -7,6 +7,7 @@ This is a full-stack Instagram clone application built using modern web technolo
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Installation](#installation)
+- [Deployment](#deployment)
 - [Project Structure](#project-structure)
 - [Screenshots](#screenshots)
 - [API Documentation](#api-documentation)
@@ -100,6 +101,9 @@ cd instagram-clone
     ```
 
 ---
+## Deployment
+The application is deployed on an AWS EC2 instance running Ubuntu 20.04.
+![Deployment Screenshot](Instagram%20Clone/AWSubuntu.png)
 
 ## Project Structure
 ```
