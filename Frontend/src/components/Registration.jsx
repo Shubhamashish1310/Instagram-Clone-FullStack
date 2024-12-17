@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Insta from "./Pages/instagram.svg";
 
 function Registration() {
@@ -113,7 +113,16 @@ function Registration() {
             {loading ? "Submitting..." : "Sign Up"}
           </button>
         </form>
+        <div className="mt-6 text-center text-lg text-gray-600">
+          <p>
+            Already have an account?&nbsp;
+            <Link to="/login" className="text-pink-600 hover:underline">
+              Login
+            </Link>
+          </p>
+        </div>
       </div>
+     
     </div>
   );
 }

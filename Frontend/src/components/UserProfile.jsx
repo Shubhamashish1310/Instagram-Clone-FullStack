@@ -104,37 +104,54 @@ function ProfilePage() {
   
         {/* Posts Section */}
         <div className="max-w-5xl mx-auto px-4 py-8">
-          <h2 className="text-2xl font-semibold text-primary-content mb-6">Posts</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-            {userPosts.map((post) => (
-              <div
-                key={post._id}
-                className="relative group bg-white shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition-all duration-300"
-              >
-                <img
-                  src={post.image}
-                  alt={post.caption}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex items-center justify-center">
-                  <div className="text-white opacity-0 group-hover:opacity-100 transition-all duration-300 text-center">
-                    <p className="font-bold text-lg">{post.caption}</p>
-                    <div className="flex space-x-4 mt-2">
-                      <span className="flex items-center space-x-1">
-                        ❤️
-                        <span>10</span>
-                      </span>
-                      <span className="flex items-center space-x-1">
-                        💬
-                        <span>5</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+  <h2 className="text-2xl font-semibold text-primary-content mb-6">Posts</h2>
+  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+    {userPosts.map((post) => (
+      <div
+        key={post._id}
+        className="relative group bg-white shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition-all duration-300"
+      >
+        {console.log(post)}
+        
+        {/* Check if the media is an image or a video */}
+        {post.image && post.image.match(/\.(jpeg|jpg|gif|png)$/i) ? (
+          <img
+            src={post.image}
+            alt={post.caption}
+            className="w-full h-48 object-cover"
+          />
+        ) : post.image && post.image.endsWith('.mp4') ? (
+          <video
+            controls
+            className="w-full h-48 object-cover"
+          >
+            <source src={post.image} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          <div>No media available</div> // Fallback if no valid media type
+        )}
+
+        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex items-center justify-center">
+          <div className="text-white opacity-0 group-hover:opacity-100 transition-all duration-300 text-center">
+            <p className="font-bold text-lg">{post.caption}</p>
+            <div className="flex space-x-4 mt-2">
+              <span className="flex items-center space-x-1">
+                ❤️
+                <span>10</span>
+              </span>
+              <span className="flex items-center space-x-1">
+                💬
+                <span>5</span>
+              </span>
+            </div>
           </div>
         </div>
+      </div>
+    ))}
+  </div>
+</div>
+
   
         {/* Floating Action Button */}
         <button className="fixed bottom-8 right-8 bg-pink-500 hover:bg-pink-600 text-white w-16 h-16 rounded-full shadow-lg flex items-center justify-center text-3xl">

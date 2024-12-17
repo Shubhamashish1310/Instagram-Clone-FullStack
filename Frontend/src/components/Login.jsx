@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode";
 
 import { toast } from 'react-toastify';
 import homeImage from '../assets/home-phones.png'; // Replace with the correct path
-import Header from './Header';
+
 import Insta from './Pages/instagram.svg'
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -73,7 +73,7 @@ const Login = () => {
 
                 {/* Right Section - Login Form */}
                 <div className="flex flex-col w-full lg:w-[350px] p-10 bg-white rounded-lg shadow-lg">
-                    <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Instagram</h2>
+                    <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">InstaConnect</h2>
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
                             <input

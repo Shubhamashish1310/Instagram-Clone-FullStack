@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ImUpload } from 'react-icons/im';
 import { BsSearch } from 'react-icons/bs';
 import Insta from './Pages/instagram.svg'
+import Connect from './Pages/connect.svg'
 import { toast } from 'react-toastify';
 
 
@@ -21,9 +22,10 @@ function Left() {
                 
                 <ul className="space-y-11">
                     <li>  <Theme/> 
-                    <div>
+                    <span className="flex items-center gap-0">
+                        <img src={Connect} alt="" />
             <img src={Insta} alt="Instagram Logo" />
-        </div>
+        </span>
           
                     </li>
                     <li className="flex items-center space-x-3  cursor-pointer">
